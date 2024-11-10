@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppService } from './app.service';
 import { join } from 'path';
 
 import { ConfigModule } from '@nestjs/config';
@@ -24,6 +23,5 @@ import ServersModule from './modules/servers/servers.module';
 		QrCodeModule,
 		ServersModule,
 	],
-	providers: [AppService],
 })
 export class AppModule {}
