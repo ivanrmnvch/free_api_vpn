@@ -28,7 +28,7 @@ jobs:
         run: docker network create xray_vpn_services_network
 
       - name: Start Docker Compose services
-        run: docker compose up -d api-gateway
+        run: docker compose up api-gateway
 
 #      - name: Set up Node.js
 #        uses: actions/setup-node@v2
