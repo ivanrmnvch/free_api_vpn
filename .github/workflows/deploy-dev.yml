@@ -21,6 +21,9 @@ jobs:
       - name: Build and push Docker images
         run: docker compose build
 
+      - name: Copy env
+        run: make copy-env
+
       - name: Start Docker Compose services
         run: docker compose up -d api-gateway
 
