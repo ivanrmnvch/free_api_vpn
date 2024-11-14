@@ -1,0 +1,28 @@
+services:
+  api-gateway:
+    # todo добавить healthcheck
+    build:
+      dockerfile: Dockerfile
+    image: api-gateway:latest
+    container_name: api-gateway
+    profiles: ['dev']
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8082:8082"
+    env_file:
+      - .env
+#    develop:
+#      watch:
+#        - path: ./package.json
+#          action: rebuild
+#        - path: ./src
+#          target: /api-gateway/src
+#          action: sync
+    networks:
+      - xray_vpn_services_network
+
+networks:
+  xray_vpn_services_network:
+    external: true

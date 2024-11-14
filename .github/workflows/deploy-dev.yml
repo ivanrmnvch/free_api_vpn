@@ -17,8 +17,18 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: npm install
+#      - name: Install dependencies
+#        run: npm install
 
       - name: Build project
-        run: npm run dev
+        run: make build
+
+#      - name: Load environment variables from .env file
+#        run: make copy-env
+#
+#      - name: Load environment variables from github
+#        run: |
+#          echo "POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}" >> $GITHUB_ENV
+#          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> $GITHUB_ENV
+#          echo "POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}" >> $GITHUB_ENV
+#          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> $GITHUB_ENV
