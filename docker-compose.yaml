@@ -6,9 +6,9 @@ services:
     image: api-gateway:latest
     container_name: api-gateway
     profiles: ['dev']
-    depends_on:
-      postgres:
-        condition: service_healthy
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
     ports:
       - "8082:8082"
     env_file:
