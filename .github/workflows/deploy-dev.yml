@@ -25,13 +25,12 @@ jobs:
         run: make copy-env
 
       - name: Update env
-        uses: ivanrmnvch/free_api_vpn/.github/workflows/update-env.yml@main
-        with:
-          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+        run: |
+          sed -i "s/^POSTGRES_HOST=.*$/POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}/" .env
+          sed -i "s/^POSTGRES_USER=.*$/POSTGRES_USER=${{ secrets.POSTGRES_USER }}/" .env
+          sed -i "s/^POSTGRES_PORT=.*$/POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}/" .env
+          sed -i "s/^POSTGRES_PASSWORD=.*$/POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}/" .env
+          sed -i "s/^POSTGRES_DB=.*$/POSTGRES_DB=${{ secrets.POSTGRES_DB }}/" .env
 
       - name: Create docker network
         run: docker network create xray_vpn_services_network
