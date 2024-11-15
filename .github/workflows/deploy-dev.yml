@@ -25,7 +25,7 @@ jobs:
         run: make copy-env
 
       - name: Update env
-        uses: ./.github/workflows/update-env.yml
+        uses: ivanrmnvch/free_api_vpn/.github/workflows/update-env.yml@main
         with:
           POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
