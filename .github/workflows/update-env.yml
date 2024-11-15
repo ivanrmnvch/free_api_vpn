@@ -1,0 +1,41 @@
+name: Update env
+
+on:
+  workflow_call:
+    inputs:
+      POSTGRES_HOST:
+        description: 'Postgres host'
+        required: true
+        type: string
+      POSTGRES_USER:
+        description: 'Postgres user'
+        required: true
+        type: string
+      POSTGRES_PORT:
+        description: 'Postgres port'
+        required: true
+        type: string
+      POSTGRES_PASSWORD:
+        description: 'Postgres password'
+        required: true
+        type: string
+      POSTGRES_DB:
+        description: 'Postgres database name'
+        required: true
+        type: string
+
+jobs:
+  update-env:
+    runs-on: ubuntu-latest
+
+    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v3
+
+      - name: Update env file
+        run: |
+          sed -i "s/^POSTGRES_HOST=.*$/POSTGRES_HOST=${{ inputs.POSTGRES_HOST }}/" .env
+          sed -i "s/^POSTGRES_USER=.*$/POSTGRES_USER=${{ inputs.POSTGRES_USER }}/" .env
+          sed -i "s/^POSTGRES_PORT=.*$/POSTGRES_PORT=${{ inputs.POSTGRES_PORT }}/" .env
+          sed -i "s/^POSTGRES_PASSWORD=.*$/POSTGRES_PASSWORD=${{ inputs.POSTGRES_PASSWORD }}/" .env
+          sed -i "s/^POSTGRES_DB=.*$/POSTGRES_DB=${{ inputs.POSTGRES_DB }}/" .env
