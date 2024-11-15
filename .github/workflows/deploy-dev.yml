@@ -31,6 +31,7 @@ jobs:
           sed -i "s/^POSTGRES_PORT=.*$/POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}/" .env
           sed -i "s/^POSTGRES_PASSWORD=.*$/POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}/" .env
           sed -i "s/^POSTGRES_DB=.*$/POSTGRES_DB=${{ secrets.POSTGRES_DB }}/" .env
+          sed -i "s/^TEST=.*$/TEST=${{ vars.TEST }}/" .env
 
       - name: Create docker network
         run: docker network create xray_vpn_services_network

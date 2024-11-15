@@ -32,6 +32,7 @@ export default class PostgresService implements OnModuleInit {
 		// private logger: CustomLogger
 	) {
 		console.log('config', config);
+		console.log('test', process.env.TEST);
 		this.pool = new Pool(config);
 	}
 
