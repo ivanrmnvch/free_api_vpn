@@ -8,6 +8,6 @@ async function bootstrap() {
 		logger: ['error', 'warn'],
 	});
 	app.setGlobalPrefix('api');
-	await app.listen(+process.env.TVS_B_PORT || 8082);
+	await app.listen(+process.env.PORT || 8082);
 }
 bootstrap();
