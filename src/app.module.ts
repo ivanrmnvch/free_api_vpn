@@ -12,6 +12,7 @@ import mqttConfig from './config/mqtt.config';
 import UserModule from './modules/user/user.module';
 import QrCodeModule from './modules/qrCode/qrCode.module';
 import ServersModule from './modules/servers/servers.module';
+import XrayManagerModule from './modules/xrayManager/xrayManager.module';
 
 @Module({
 	imports: [
@@ -25,6 +26,7 @@ import ServersModule from './modules/servers/servers.module';
 		UserModule,
 		QrCodeModule,
 		ServersModule,
+		XrayManagerModule,
 	],
 })
 export class AppModule {}

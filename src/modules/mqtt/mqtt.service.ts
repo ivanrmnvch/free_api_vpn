@@ -13,58 +13,10 @@ export default class MqttService {
 
 		this.client.on('connect', () => {
 			console.log('Connected to MQTT broker');
-			// Подписка на тему
-			this.client.subscribe('test/topic', (err) => {
-				if (!err) {
-					console.log('Subscribed to topic');
-				}
-			});
-		});
-
-		this.client.on('message', (topic, message) => {
-			console.log(`Received message: ${message.toString()} on topic: ${topic}`);
 		});
 	}
 
-	publishMessage() {
-		// Публикация сообщения
-		this.client.publish('test/topic', 'Hello from NestJS');
+	publishMessage(msg: any) {
+		this.client.publish('vpn-client', JSON.stringify(msg));
 	}
 }
-
-// import { Injectable, OnModuleInit } from '@nestjs/common';
-// import * as mqtt from 'mqtt';
-//
-// @Injectable()
-// export class MqttService implements OnModuleInit {
-// 	private client: mqtt.MqttClient;
-//
-// 	onModuleInit() {
-// 		this.client = mqtt.connect({
-// 			host: 'broker.example.com',
-// 			port: 1883,
-// 			protocol: 'mqtt',
-// 			username: 'yourUsername',
-// 			password: 'yourPassword',
-// 		});
-//
-// 		this.client.on('connect', () => {
-// 			console.log('Connected to MQTT broker');
-// 			// Подписка на тему
-// 			this.client.subscribe('test/topic', (err) => {
-// 				if (!err) {
-// 					console.log('Subscribed to topic');
-// 				}
-// 			});
-// 		});
-//
-// 		this.client.on('message', (topic, message) => {
-// 			console.log(`Received message: ${message.toString()} on topic: ${topic}`);
-// 		});
-// 	}
-//
-// 	publishMessage() {
-// 		// Публикация сообщения
-// 		this.client.publish('test/topic', 'Hello from NestJS');
-// 	}
-// }
