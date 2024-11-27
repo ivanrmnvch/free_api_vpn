@@ -10,8 +10,6 @@ COPY ./package*.json ./
 
 COPY ./ ./
 
-RUN echo "MODE: ${APP_MODE}"
-
 RUN if [ "${APP_MODE}" = "production" ]; then \
         npm install --production; \
         npm install @nestjs/cli; \
@@ -24,14 +22,11 @@ RUN if [ "${APP_MODE}" = "production" ]; then \
         npm uni @nestjs/cli; \
     fi
 
-CMD if [ "ENV_APP_MODE" = "production" ]; then \
-        echo "ENV_APP_MODE"; \
-        echo "{APP_MODE}"; \
-        echo "APP_MODE"; \
-        npm run start:prod; \
-    else \
-        echo "ENV_APP_MODE"; \
-        echo "{APP_MODE}"; \
-        echo "APP_MODE"; \
-        npm run dev; \
-    fi
+CMD ["/bin/sh", "-c", "\
+        if [ \"$ENV_APP_MODE\" = \"production\" ]; then \
+            echo \"Running in production mode\"; \
+            npm run start:prod; \
+        else \
+            echo \"Running in development mode\"; \
+            npm run dev; \
+        fi"]
