@@ -3,9 +3,11 @@ services:
     # todo добавить healthcheck
     build:
       dockerfile: Dockerfile
+      args:
+        APP_MODE: ${APP_MODE}
     image: api-gateway:latest
     container_name: api-gateway
-#    profiles: ['dev']
+    # profiles: [ 'dev']
 #    depends_on:
 #      postgres:
 #        condition: service_healthy
