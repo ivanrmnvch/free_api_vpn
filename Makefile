@@ -8,7 +8,7 @@ build-prod:
 	APP_MODE=production docker compose build --no-cache api-gateway
 
 dev:
-	APP_MODE=production docker compose up --watch api-gateway
+	APP_MODE=development docker compose up --watch api-gateway
 
 prod:
 	APP_MODE=production docker compose up api-gateway
