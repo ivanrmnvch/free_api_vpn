@@ -2,6 +2,8 @@ FROM node:18-alpine
 
 ARG APP_MODE
 
+ENV ENV_APP_MODE=${APP_MODE}
+
 WORKDIR /api-gateway
 
 COPY ./package*.json ./
@@ -22,8 +24,14 @@ RUN if [ "${APP_MODE}" = "production" ]; then \
         npm uni @nestjs/cli; \
     fi
 
-CMD if [ "${APP_MODE}" = "production" ]; then \
+CMD if [ "ENV_APP_MODE" = "production" ]; then \
+        echo "ENV_APP_MODE"
+        echo "{APP_MODE}"
+        echo "APP_MODE"
         npm run start:prod; \
     else \
+        echo "ENV_APP_MODE"
+        echo "{APP_MODE}"
+        echo "APP_MODE"
         npm run dev; \
     fi
