@@ -25,13 +25,13 @@ RUN if [ "${APP_MODE}" = "production" ]; then \
     fi
 
 CMD if [ "ENV_APP_MODE" = "production" ]; then \
-        echo "ENV_APP_MODE"
-        echo "{APP_MODE}"
-        echo "APP_MODE"
+        echo "ENV_APP_MODE"; \
+        echo "{APP_MODE}"; \
+        echo "APP_MODE"; \
         npm run start:prod; \
     else \
-        echo "ENV_APP_MODE"
-        echo "{APP_MODE}"
-        echo "APP_MODE"
+        echo "ENV_APP_MODE"; \
+        echo "{APP_MODE}"; \
+        echo "APP_MODE"; \
         npm run dev; \
     fi
