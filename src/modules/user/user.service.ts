@@ -22,7 +22,7 @@ export default class UserService {
         	lang = excluded.lang,
         	updated_at = now();
       `,
-			[id, firstName, userName, lang]
+			[id, firstName, userName || null, lang]
 		);
 	}
 }
