@@ -36,34 +36,10 @@ export default class MqttService {
 			return;
 		}
 
-		try {
-			const test = await this.client
-				.publishAsync(
-					'server-restart',
-					"g42{r4f'r"
-					// JSON.stringify(serverName)
-				)
-				.then((data) => data)
-				.catch((e) => {
-					console.log('.catch'); // todo ошибка падает сюда
-					console.error(e);
-				});
-			console.log('>>> test:', test);
-		} catch (e) {
-			console.log('catch (e)');
-			console.error(e);
-		}
-
-		try {
-			const test = this.client.publish(
-				'server-restart',
-				"g42{r4f'r"
-				// JSON.stringify(serverName)
-			);
-			console.log('test2', test);
-		} catch (e) {
-			console.log('test');
-			console.error(e);
-		}
+		await this.client
+			.publishAsync('server-restart', JSON.stringify(serverName))
+			.catch((e) => {
+				console.error(e);
+			});
 	}
 }
