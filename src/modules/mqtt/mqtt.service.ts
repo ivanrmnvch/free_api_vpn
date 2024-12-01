@@ -37,11 +37,18 @@ export default class MqttService {
 		}
 
 		try {
+			const test = this.client.publish('restart', serverName);
+			console.log('test2', test);
+		} catch (e) {
+			console.error(e);
+		}
+
+		try {
 			const test = await this.client
 				.publishAsync('restart', serverName)
 				.then((data) => data)
 				.catch((e) => {
-					console.log('.catch');
+					console.log('.catch'); // todo ошибка падает сюда
 					console.error(e);
 				});
 			console.log('>>> test:', test);
