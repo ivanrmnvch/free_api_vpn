@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { MQTT_CONFIG } from '../../const/mqtt';
 import { IClientOptions } from 'mqtt/src/lib/client';
 import * as mqtt from 'mqtt';
+import RestartDto from '../xrayManager/dto/restart.dto';
 
 @Injectable()
 export default class MqttService {
@@ -29,10 +30,15 @@ export default class MqttService {
 		// }
 	}
 
-	async restart(body: string) {
+	async restart(body: RestartDto) {
+		const serverName = body?.serverName;
+		if (!serverName) {
+			return;
+		}
+
 		try {
 			const test = await this.client
-				.publishAsync('restart', body)
+				.publishAsync('restart', serverName)
 				.then((data) => data)
 				.catch((e) => {
 					console.log('.catch');

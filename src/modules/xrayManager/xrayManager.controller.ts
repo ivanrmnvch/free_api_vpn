@@ -1,6 +1,7 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import XrayManagerService from './xrayManager.service';
 import XrayClientQueryDto from './dto/xrayClientQuery.dto';
+import RestartDto from './dto/restart.dto';
 
 @Controller('xray-manager')
 export default class XrayManagerController {
@@ -12,8 +13,8 @@ export default class XrayManagerController {
 	}
 
 	@Post('/restart')
-	async restart(@Body('name') name: string) {
-		console.log('body', name);
-		return this.xrayManagerService.restart(name);
+	async restart(@Body() body: RestartDto) {
+		console.log('body', body);
+		return this.xrayManagerService.restart(body);
 	}
 }

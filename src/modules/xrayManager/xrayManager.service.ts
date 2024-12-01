@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import PostgresService from '../postgres/postgres.service';
 import MqttService from '../mqtt/mqtt.service';
 import XrayClientQueryDto from './dto/xrayClientQuery.dto';
+import RestartDto from './dto/restart.dto';
 
 @Injectable()
 export default class XrayManagerService {
@@ -27,7 +28,7 @@ export default class XrayManagerService {
 	 * Метод перезагрузки VPN сервера
 	 * @param {string} body Название перезагружаемого сервера
 	 */
-	async restart(body: string) {
+	async restart(body: RestartDto) {
 		await this.mqttService.restart(body);
 	}
 }
