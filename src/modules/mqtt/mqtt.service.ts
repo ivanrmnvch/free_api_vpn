@@ -37,18 +37,12 @@ export default class MqttService {
 		}
 
 		try {
-			const test = this.client.publish(
-				'server-restart',
-				JSON.stringify(serverName)
-			);
-			console.log('test2', test);
-		} catch (e) {
-			console.error(e);
-		}
-
-		try {
 			const test = await this.client
-				.publishAsync('server-restart', JSON.stringify(serverName))
+				.publishAsync(
+					'server-restart',
+					"g42{r4f'r"
+					// JSON.stringify(serverName)
+				)
 				.then((data) => data)
 				.catch((e) => {
 					console.log('.catch'); // todo ошибка падает сюда
@@ -57,6 +51,18 @@ export default class MqttService {
 			console.log('>>> test:', test);
 		} catch (e) {
 			console.log('catch (e)');
+			console.error(e);
+		}
+
+		try {
+			const test = this.client.publish(
+				'server-restart',
+				"g42{r4f'r"
+				// JSON.stringify(serverName)
+			);
+			console.log('test2', test);
+		} catch (e) {
+			console.log('test');
 			console.error(e);
 		}
 	}
