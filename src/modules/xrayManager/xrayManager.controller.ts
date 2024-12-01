@@ -12,8 +12,8 @@ export default class XrayManagerController {
 	}
 
 	@Post('/restart')
-	async restart(@Body() body: string) {
-		console.log('body', body);
-		return this.xrayManagerService.restart(body);
+	async restart(@Body('name') name: string) {
+		console.log('body', name);
+		return this.xrayManagerService.restart(name);
 	}
 }
