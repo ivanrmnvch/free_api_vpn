@@ -17,6 +17,8 @@ export default class MqttService {
 	}
 
 	publishMessage(msg: any) {
-		this.client.publish('vpn-client', JSON.stringify(msg));
+		console.log(">>> pub", msg);
+		const test = this.client.publish('vpn-client', JSON.stringify(msg));
+		console.log("test", test);
 	}
 }
