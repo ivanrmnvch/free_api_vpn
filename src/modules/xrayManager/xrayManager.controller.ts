@@ -10,4 +10,9 @@ export default class XrayManagerController {
 	async addClient(@Body() body: XrayClientQueryDto) {
 		return this.xrayManagerService.addClient(body);
 	}
+
+	@Post('/restart')
+	async restart(@Body() body: string) {
+		return this.xrayManagerService.restart(body);
+	}
 }

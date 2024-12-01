@@ -22,4 +22,12 @@ export default class XrayManagerService {
 
 		return null;
 	}
+
+	/**
+	 * Метод перезагрузки VPN сервера
+	 * @param {string} body Название перезагружаемого сервера
+	 */
+	async restart(body: string) {
+		await this.mqttService.restart(body);
+	}
 }

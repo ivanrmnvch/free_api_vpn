@@ -16,9 +16,32 @@ export default class MqttService {
 		});
 	}
 
-	publishMessage(msg: any) {
-		console.log(">>> pub", msg);
-		const test = this.client.publish('vpn-client', JSON.stringify(msg));
-		console.log("test", test);
+	async publishMessage(msg: any) {
+		this.client.publish('vpn-client', JSON.stringify(msg));
+
+		// try {
+		// 	// todo test try catch
+		// 	// или .catch(())???
+		// 	// await this.client.publishAsync('vpn-client', JSON.stringify(msg));
+		//
+		// } catch (e) {
+		// 	console.error(e);
+		// }
+	}
+
+	async restart(body: string) {
+		try {
+			const test = await this.client
+				.publishAsync('restart', body)
+				.then((data) => data)
+				.catch((e) => {
+					console.log('.catch');
+					console.error(e);
+				});
+			console.log('>>> test:', test);
+		} catch (e) {
+			console.log('catch (e)');
+			console.error(e);
+		}
 	}
 }
