@@ -1,11 +1,13 @@
 export default class DigisellerDto {
-	id: number;
-	inv: number;
-	amount: number;
-	type_curr: string;
+	id: string;
+	inv: string;
+	amount: string;
+	type_curr: 'WMZ'| 'WMR' | 'WME'| 'WMU';
 	sign: string;
 	options: Array<{
-		id: number;
-		user_data: number|string;
+		id: string;
+		type: string;
+		user_data: string;
 	}>;
+	lang: string;
 }
