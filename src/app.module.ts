@@ -13,6 +13,7 @@ import UserModule from './modules/user/user.module';
 import QrCodeModule from './modules/qrCode/qrCode.module';
 import ServersModule from './modules/servers/servers.module';
 import XrayManagerModule from './modules/xrayManager/xrayManager.module';
+import DigisellerModule from './modules/digiseller/digiseller.module';
 
 @Module({
 	imports: [
@@ -27,6 +28,7 @@ import XrayManagerModule from './modules/xrayManager/xrayManager.module';
 		QrCodeModule,
 		ServersModule,
 		XrayManagerModule,
+		DigisellerModule,
 	],
 })
 export class AppModule {}
