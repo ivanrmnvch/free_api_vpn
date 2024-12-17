@@ -4,7 +4,7 @@ ARG APP_MODE
 
 ENV ENV_APP_MODE=${APP_MODE}
 
-WORKDIR /api-gateway
+WORKDIR /api-gateway_dev
 
 COPY ./package*.json ./
 
