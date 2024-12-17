@@ -9,6 +9,9 @@ async function bootstrap() {
 		logger: ['error', 'warn'],
 	});
 	app.setGlobalPrefix('api');
+	console.log('MODE', process.env.ENV_APP_MODE === 'production');
+	console.log('port', process.env.PORT);
+	console.log('port dev', process.env.PORT_DEV);
 	await app.listen(
 		process.env.ENV_APP_MODE === 'production'
 			? +process.env.PORT || 8082
