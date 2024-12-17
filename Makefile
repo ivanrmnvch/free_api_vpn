@@ -4,13 +4,13 @@ copy-env:
 	cd ./scripts && sh copy-env.sh
 
 build-dev:
-	APP_MODE=development docker compose build --no-cache $(API_GATEWAY)#_dev
+	APP_MODE=development docker compose build --no-cache $(API_GATEWAY) #_dev
 
 build-prod:
 	APP_MODE=production docker compose build --no-cache $(API_GATEWAY)
 
 dev:
-	APP_MODE=development docker compose up --watch $(API_GATEWAY)#_dev
+	APP_MODE=development docker compose up --watch $(API_GATEWAY) #_dev
 
 prod:
 	APP_MODE=production docker compose up $(API_GATEWAY)
