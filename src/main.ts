@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import process from 'node:process';
+import * as process from 'node:process';
 
 // todo вынести try catch в глобальный фильтр исключений
 
