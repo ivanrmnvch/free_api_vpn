@@ -12,10 +12,11 @@ async function bootstrap() {
 	console.log('MODE', process.env.ENV_APP_MODE === 'production');
 	console.log('port', process.env.PORT);
 	console.log('port dev', process.env.PORT_DEV);
-	await app.listen(
-		process.env.ENV_APP_MODE === 'production'
-			? +process.env.PORT || 8082
-			: +process.env.PORT_DEV || 8083
-	);
+	await app.listen(+process.env.PORT || 8082);
+	// await app.listen(
+	// 	process.env.ENV_APP_MODE === 'production'
+	// 		? +process.env.PORT || 8082
+	// 		: +process.env.PORT_DEV || 8083
+	// );
 }
 bootstrap();
