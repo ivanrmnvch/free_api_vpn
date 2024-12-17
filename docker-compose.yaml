@@ -39,7 +39,7 @@ services:
       dockerfile: Dockerfile
       args:
         APP_MODE: ${APP_MODE}
-    image: api-gateway:${APP_MODE}
+    image: api-gateway_${APP_MODE}:${APP_MODE}
     container_name: api-gateway_${APP_MODE}
     restart: always
     # profiles: [ 'dev']
