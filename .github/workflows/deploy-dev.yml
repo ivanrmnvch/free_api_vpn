@@ -1,0 +1,61 @@
+name: Deploy to Dev
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Build and push Docker images
+        run: docker compose build
+
+      - name: Copy env
+        run: make copy-env
+
+      - name: Update env
+        run: |
+          sed -i "s/^POSTGRES_HOST=.*$/POSTGRES_HOST=${{ vars.POSTGRES_HOST }}/" .env
+          sed -i "s/^POSTGRES_USER=.*$/POSTGRES_USER=${{ vars.POSTGRES_USER }}/" .env
+          sed -i "s/^POSTGRES_PORT=.*$/POSTGRES_PORT=${{ vars.POSTGRES_PORT }}/" .env
+          sed -i "s/^POSTGRES_PASSWORD=.*$/POSTGRES_PASSWORD=${{ vars.POSTGRES_PASSWORD }}/" .env
+          sed -i "s/^POSTGRES_DB=.*$/POSTGRES_DB=${{ vars.POSTGRES_DB }}/" .env
+          sed -i "s/^TEST=.*$/TEST=${{ vars.TEST }}/" .env
+
+      - name: Create docker network
+        run: docker network create xray_vpn_services_network
+
+      - name: Start Docker Compose services
+        run: docker compose up --exit-code-from api-gateway
+
+#      - name: Set up Node.js
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: '18'
+
+#      - name: Install dependencies
+#        run: npm install
+
+#      - name: Build project
+#        run: make build
+
+#      - name: Load environment variables from .env file
+#        run: make copy-env
+#
+#      - name: Load environment variables from github
+#        run: |
+#          echo "POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}" >> $GITHUB_ENV
+#          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> $GITHUB_ENV
+#          echo "POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}" >> $GITHUB_ENV
+#          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> $GITHUB_ENV

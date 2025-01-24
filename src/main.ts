@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import * as process from 'node:process';
 
 // todo вынести try catch в глобальный фильтр исключений
 
@@ -8,6 +9,14 @@ async function bootstrap() {
 		logger: ['error', 'warn'],
 	});
 	app.setGlobalPrefix('api');
-	await app.listen(+process.env.TVS_B_PORT || 8082);
+	console.log('MODE', process.env.ENV_APP_MODE === 'production');
+	console.log('port', process.env.PORT);
+	console.log('port dev', process.env.PORT_DEV);
+	await app.listen(+process.env.PORT || 8082);
+	// await app.listen(
+	// 	process.env.ENV_APP_MODE === 'production'
+	// 		? +process.env.PORT || 8082
+	// 		: +process.env.PORT_DEV || 8083
+	// );
 }
 bootstrap();

@@ -1,0 +1,78 @@
+#services:
+#  api-gateway:
+#    # todo добавить healthcheck
+#    build:
+#      dockerfile: Dockerfile
+#      args:
+#        APP_MODE: ${APP_MODE}
+#    image: api-gateway:${APP_MODE}
+#    container_name: api-gateway_${APP_MODE}
+#    restart: always
+#    # profiles: [ 'dev']
+##    depends_on:
+##      postgres:
+##        condition: service_healthy
+#    ports:
+#      - "8082:8082"
+#      - "8083:8083"
+#    env_file:
+#      - ./.env
+#    develop:
+#      watch:
+#        - path: ./package.json
+#          action: rebuild
+#        - path: ./src
+#          target: /api-gateway/src
+#          action: sync
+#    networks:
+#      - xray_vpn_services_network
+#
+#networks:
+#  xray_vpn_services_network:
+#    external: true
+
+
+services:
+  x-common: &common
+    # todo добавить healthcheck
+    build:
+      dockerfile: Dockerfile
+      args:
+        APP_MODE: ${APP_MODE}
+    image: api-gateway_${APP_MODE}:${APP_MODE}
+    container_name: api-gateway_${APP_MODE}
+    restart: always
+    # profiles: [ 'dev']
+    #    depends_on:
+    #      postgres:
+    #        condition: service_healthy
+#    ports:
+#      - "8082:8082"
+#      - "8083:8083"
+    environment:
+      ENV_APP_MODE: ${APP_MODE}
+    env_file:
+      - ./.env
+    develop:
+      watch:
+        - path: ./package.json
+          action: rebuild
+        - path: ./src
+          target: /api-gateway_${APP_MODE}/src
+          action: sync
+    networks:
+      - xray_vpn_services_network
+
+  api-gateway:
+    <<: *common
+    ports:
+      - ${PORT}:${PORT}
+
+  api-gateway_dev:
+    <<: *common
+    ports:
+      - ${PORT_DEV}:${PORT_DEV}
+
+networks:
+  xray_vpn_services_network:
+    external: true

@@ -9,6 +9,7 @@ export default class UserController {
 
 	@Post('/')
 	async addUser(@Body() body: UserDto) {
+		console.log('body', body);
 		return this.userService.addUser(body);
 	}
 }
